@@ -1,0 +1,78 @@
+/*-----------------position-----------------*/
+.m-top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/*-----------------padding-----------------*/
+.m-padded-mini{
+    padding: 0.2em !important;
+}
+.m-padded-small{
+    padding: 0.4em !important;
+}
+
+/*-----------------top and bottom padding-----------------*/
+.m-padded-tb-mini{
+    padding-top: 0.2em !important;
+    padding-bottom: 0.2em !important;
+}
+.m-padded-tb-small{
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+.m-padded-tb-middle{
+    padding-top: 2.5em !important;
+    padding-bottom: 2.5em !important;
+}
+.m-padded-tb-large{
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+
+.m-padded-tb-massive{
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}
+
+/*-----------------top and bottom margin-----------------*/
+.m-margin-tb-mini{
+    margin-top: 0.4em !important;
+    margin-bottom: 0.4em !important;
+}
+.m-margin-tb-small{
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
+}
+.m-margin-tb-middle{
+    margin-top: 2em !important;
+    margin-bottom: 2em !important;
+}
+.m-margin-tb-large{
+    margin-top: 3em !important;
+    margin-bottom: 3em !important;
+}
+.m-margin-tb-massive{
+    margin-top: 4em !important;
+    margin-bottom: 4em !important;
+}
+
+
+.m-inline-block{
+    display: inline-block !important;
+}
+
+.m-mobile-show{
+    display: none !important;
+}
+
+@media screen and (max-width: 768px){
+    .m-mobile-hide{
+        display: none !important;
+    }
+
+    .m-mobile-show{
+        display: block !important;
+    }
+}
