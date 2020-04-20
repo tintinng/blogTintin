@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width,initial-scale=1.0">
+    <title>标签</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+
+<!--    导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui brown header item">Blog</h2>
+                <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="tag icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                <div class="m-item right item m-mobile-hide">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+<!--中间内容-->
+    <div class="m-padded-tb-large">
+        <div class="ui container">
+            <div class="ui top attached segment">
+                <div class="ui attached browns ment">
+                    <div class="column">
+                        <h3 class="ui brown header">标签</h3>
+                    </div>
+                    <div class="ui segment">
+                        <a class="ui brown left pointing label m-margin-tb-mini">Java<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">Spring<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">计算机网络<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">C<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">操作系统<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">数据结构与算法<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">leetcode<div class="detail">8</div></a>
+                        <a class="ui brown left pointing label m-margin-tb-mini">MySQL<div class="detail">8</div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui brown segment">
+                <div class="ui padded vertical segment">
+                    <div class="ui mobile reversed stackable grid">
+                        <div class="eleven wide column">
+                            <h3 class="ui header">文章标题</h3>
+                            <p>文章内容</p>
+                            <div class="ui stackable grid">
+                                <div class="eleven wide column">
+                                    <div class="ui horizontal link list">
+                                        <div class="item">
+                                            <img src="https://picsum.photos/100/100?image=1002" class="ui avatar image">
+                                            <div class="content"><a href="#" class="header">叮叮叮</a></div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i>2020-4-10
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i>0
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned five wide column">
+                                    <a href="#" target="_blank" class="ui brown basic label m-padded-small">读书笔记</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right aligned five wide column">
+                            <a href="#" target="_blank">
+                                <img src="https://picsum.photos/800/400?image=1001" class="ui rounded image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--底部footer-->
+    <footer class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted linked list">
+                        <div class="item">
+                            <img src="../static/images/wechatOrder.jpg" class="ui rounded image" style="width: 120px">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">最新博客</h4>
+                    <div class="ui inverted linked list">
+                        <a href="#" class="item">用户故事1</a>
+                        <a href="#" class="item">用户故事2</a>
+                        <a href="#" class="item">用户故事3</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">联系我</h4>
+                    <div class="ui inverted linked list">
+                        <a href="#" class="item">Email:906183742@qq.com</a>
+                        <a href="#" class="item">QQ:906183742</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">最新博客</h4>
+                    <p>这是我的个人博客，分享关于技术文章和其他一些自己的思考内容</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p>Copytight@2019-2020 Desgined by Tintin</p>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui/2.2.4/semantic.min.js"></script>
+
+    <script>
+        $('.menu.toggle').click(function () {
+
+        });
+    </script>
+
+</body>
+</html>
