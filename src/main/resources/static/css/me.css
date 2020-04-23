@@ -9,6 +9,15 @@ body{
     right: 0;
 }
 
+.m-fixed{
+    position: fixed !important;
+    z-index: 10 !important;
+}
+.m-right-bottom{
+    bottom: 0 !important;
+    right: 0 !important;
+}
+
 /*-----------------padding-----------------*/
 .m-padded-mini{
     padding: 0.2em !important;
@@ -16,7 +25,9 @@ body{
 .m-padded-small{
     padding: 0.4em !important;
 }
-
+.m-padded-middle{
+    padding: 1.5em !important;
+}
 /*-----------------top and bottom padding-----------------*/
 .m-padded-tb-mini{
     padding-top: 0.2em !important;
