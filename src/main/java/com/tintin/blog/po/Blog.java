@@ -2,16 +2,21 @@ package com.tintin.blog.po;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
+@Table(name = "t_blog")
 public class Blog{
     /**
      * entity properties
      */
+    @Id
+    @GeneratedValue
     private Long id;
     private String title;
     private String content;
@@ -24,13 +29,17 @@ public class Blog{
     private boolean published;
     private boolean recommend;
     private Date createTime;
-    private Data updateTime;
+    private Date updateTime;
 
     /**
      * entity relationship
      */
+    @ManyToOne
     private Type type;
+    @ManyToMany
     private List<Tag> tags = new ArrayList<>();
+    @ManyToOne
     private User user;
+    @ManyToMany
     private List<Comment> comments = new ArrayList<>();
 }
