@@ -2,6 +2,7 @@ package com.tintin.blog.service;
 
 import com.tintin.blog.dao.UserRepository;
 import com.tintin.blog.po.User;
+import com.tintin.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User checkUser(String username, String password) {
-        User user = userRepository.findByUserNameAndPassword(username,password);
+        User user = userRepository.findByUserNameAndPassword(username, MD5Utils.code(password));
         return user;
     }
 }
