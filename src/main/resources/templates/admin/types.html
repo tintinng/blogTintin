@@ -3,19 +3,19 @@
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1.0">
-    <title>后台管理</title>
+    <title>分类管理</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="/static/css/me.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
 </head>
 <body>
 
 <!--    导航-->
-    <nav th:replace="admin/_fragments::menu(0)" class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="admin/_fragments::menu(2)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui brown basic header item">管理后台</h2>
                 <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>博客</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
                 <a href="#" class="m-item item m-mobile-hide"><i class="tag icon"></i>标签</a>
                 <div class="right m-item m-mobile-hide menu">
                     <div class="ui dropdown item">
@@ -35,21 +35,57 @@
             <i class="sidebar icon"></i>
         </a>
     </nav>
-
-<!--中间内容-->
-    <div class="m-container-small m-padded-tb-large">
+    <div class="ui attached pointing menu">
         <div class="ui container">
-            <div class="ui success large message">
-                <h2>Hello!</h2>
-                <p>欢迎登录!</p>
-            </div>
-            <div>
-                <img src="../../static/images/hust.jpg" th:src="@{/images/hust.jpg}" class="ui rounded bordered fluid image">
+            <div class="right menu">
+                <a href="#" class="item">新增</a>
+                <a href="#" class="brown active item">列表</a>
             </div>
         </div>
     </div>
-<br>
-<br>
+
+<!--中间内容-->
+    <div class="m-container-small m-padded-tb-middle">
+        <div class="ui container">
+            <div class="ui message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">
+                    提示：
+                </div>
+                <p th:text="${message}">恭喜，操作成功！</p>
+            </div>
+            <table class="ui cell table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>类型名称</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="type,iterStat : ${page.content}">
+                    <td th:text="${page.number}*${page.size}+${iterStat.count}">1</td>
+                    <td th:text="${type.name}">读书笔记</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal button">编辑</a>
+                        <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="6">
+                        <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                            <a th:href="@{/admin/types(page=${page.number}-1)}" class="item" th:unless="${page.first}">上一页</a>
+                            <a th:href="@{/admin/types(page=${page.number}+1)}" class="item" th:unless="${page.last}">下一页</a>
+                        </div>
+                        <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated brown button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
 <!--底部footer-->
     <footer th:replace="admin/_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive">
@@ -92,14 +128,21 @@
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 </block>
 
-<script>
-    $('.menu.toggle').click(function () {
+    <script>
+        $('.menu.toggle').click(function () {
 
-    });
-
-    $('.ui.dropdown').dropdown();
-</script>
-
+        });
+        $('.ui.dropdown').dropdown();
+        // 消息提示关闭初始化
+        $('.message .close')
+            .on('click', function() {
+                $(this)
+                    .closest('.message')
+                    .transition('fade')
+                ;
+            })
+        ;
+    </script>
 
 </body>
 </html>
