@@ -19,6 +19,8 @@ public class Blog{
     @GeneratedValue
     private Long id;
     private String title;
+    @Basic
+    @Lob
     private String content;
     private String firstPicture;
     private String flag;
@@ -38,6 +40,8 @@ public class Blog{
     private Type type;
     @ManyToMany
     private List<Tag> tags = new ArrayList<>();
+    @Transient
+    private String tagIds;
     @ManyToOne
     private User user;
     @ManyToMany
