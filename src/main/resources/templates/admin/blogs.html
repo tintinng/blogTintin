@@ -86,6 +86,7 @@
                         <th>标题</th>
                         <th>类型</th>
                         <th>推荐</th>
+                        <th>状态</th>
                         <th>更新时间</th>
                         <th>操作</th>
                     </tr>
@@ -99,8 +100,8 @@
                         <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
                         <td th:text="${blog.updateTime}">2020-4-8</td>
                         <td>
-                            <a onclick="page(this)" data-page="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal button">编辑</a>
-                            <a onclick="page(this)" data-page="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red button">删除</a>
+                            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal button">编辑</a>
+                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red button">删除</a>
                         </td>
                     </tr>
                     </tbody>
