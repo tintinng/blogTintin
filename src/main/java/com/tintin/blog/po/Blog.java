@@ -42,6 +42,8 @@ public class Blog{
     private List<Tag> tags = new ArrayList<>();
     @Transient
     private String tagIds;
+    private String description;
+
     @ManyToOne
     private User user;
     @ManyToMany

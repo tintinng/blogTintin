@@ -6,7 +6,9 @@ import com.tintin.blog.web.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +53,14 @@ public class TagServiceImpl implements TagService{
     public List<Tag> listTag(String ids) {
         return tagRepostory.findAllById(convertToList(ids));
     }
+
+    @Override
+    public List<Tag> listTagTop(Integer size) {
+        Sort sort = Sort.by(Sort.Order.desc("blogs.size"));
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return tagRepostory.findTop(pageable);
+    }
+
     private List<Long> convertToList(String ids){
         List<Long> list = new ArrayList<>();
         if(!"".equals(ids) && ids!=null){
