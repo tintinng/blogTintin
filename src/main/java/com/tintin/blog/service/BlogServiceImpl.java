@@ -3,6 +3,7 @@ package com.tintin.blog.service;
 import com.tintin.blog.dao.BlogRepository;
 import com.tintin.blog.po.Blog;
 import com.tintin.blog.po.Type;
+import com.tintin.blog.util.MarkdownUtils;
 import com.tintin.blog.util.MyBeanUtils;
 import com.tintin.blog.vo.BlogQuery;
 import com.tintin.blog.web.NotFoundException;
@@ -33,6 +34,21 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Blog getBlog(Long id) {
         return blogRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogRepository.findById(id).orElse(null);
+        if(blog==null){
+            throw new NotFoundException("该博客不存在");
+        }
+        // 为了防止修改数据库，新建一个blog对象
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog,b);
+        String content = b.getContent();
+        content = MarkdownUtils.markdownToHtmlExtensions(content);
+        b.setContent(content);
+        return b;
     }
 
     /**
@@ -70,6 +86,11 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
         return blogRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Blog> listBlog(String query, Pageable pageable) {
+        return blogRepository.findByQuery(query,pageable);
     }
 
     @Override
