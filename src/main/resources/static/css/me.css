@@ -86,6 +86,11 @@ body{
     padding-right: 4em !important;
 }
 
+/*-----------------color-----------------*/
+.m-teal{
+    color: #00B5AD !important;
+}
+
 /*-----------------top and bottom margin-----------------*/
 .m-margin-tb-mini{
     margin-top: 0.4em !important;

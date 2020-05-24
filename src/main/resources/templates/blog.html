@@ -103,6 +103,27 @@
                                         <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickName}" onclick="reply(this)">回复</a>
                                     </div>
                                 </div>
+                                <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                                    <div class="comment" th:each="reply : ${comment.replyComments}">
+                                        <a class="avatar">
+                                            <img src="/images/avatar/small/matt.jpg" th:src="@{${reply.avatar}}">
+                                        </a>
+                                        <div class="content">
+                                            <a class="author" th:text="${reply.nickName}"></a>
+                                                <span th:text=" |@ ${reply.parentComment.nickName}|" class="m-teal">@小白</span>
+
+                                            <div class="metadata">
+                                                <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                            </div>
+                                            <div class="text" th:text="${reply.content}">
+                                                How artistic!
+                                            </div>
+                                            <div class="actions">
+                                                <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickName}" onclick="reply(this)">回复</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!--/*-->
@@ -337,6 +358,10 @@
                     }]
                 }
             }
+        });
+
+        $(function () {
+            $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/6");
         });
 
         $('#commentPost-btn').click(function () {
