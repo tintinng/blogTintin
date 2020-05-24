@@ -1,6 +1,7 @@
 package com.tintin.blog.web.controller;
 
 import com.tintin.blog.po.Comment;
+import com.tintin.blog.po.User;
 import com.tintin.blog.service.BlogService;
 import com.tintin.blog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class CommentController {
@@ -27,13 +30,22 @@ public class CommentController {
     public String comments(@PathVariable Long blogId, Model model){
         model.addAttribute("comments",commentService.listCommentByBlogId(blogId));
         return "blog :: commentList";
+
     }
 
     @PostMapping("/comments")
-    public String post(Comment comment){
+    public String post(Comment comment, HttpSession session){
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId));
-        comment.setAvatar(avatar);
+        User user = (User)session.getAttribute("user");
+        if(user != null){
+            comment.setAvatar(user.getAvatar());
+            comment.setAdminComment(true);
+//            comment.setNickName(user.getNickName());
+        }
+        else {
+            comment.setAvatar(avatar);
+        }
         commentService.saveComment(comment);
         return "redirect:/comments/" + comment.getBlog().getId();
     }

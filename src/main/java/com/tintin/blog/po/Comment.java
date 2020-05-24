@@ -20,6 +20,8 @@ public class Comment{
     private String avatar;
     private Date createTime;
 
+    private boolean adminComment;
+
     @ManyToOne
     private Blog blog;
     /**
