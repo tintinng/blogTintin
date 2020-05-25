@@ -14,6 +14,6 @@ public class Tag{
     private Long id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs = new ArrayList<>();
 }

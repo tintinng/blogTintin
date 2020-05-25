@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1.0">
     <title>标签</title>
@@ -10,7 +10,7 @@
 <body>
 
 <!--    导航-->
-    <nav class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="_fragments::menu(3)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui brown header item">Blog</h2>
@@ -35,55 +35,82 @@
 <!--中间内容-->
     <div class="m-padded-tb-large">
         <div class="ui container">
+
             <div class="ui top attached segment">
-                <div class="ui attached browns ment">
+                <div class="ui middle aligned two column grid">
                     <div class="column">
                         <h3 class="ui brown header">标签</h3>
                     </div>
-                    <div class="ui segment">
-                        <a class="ui brown left pointing label m-margin-tb-mini">Java<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">Spring<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">计算机网络<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">C<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">操作系统<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">数据结构与算法<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">leetcode<div class="detail">8</div></a>
-                        <a class="ui brown left pointing label m-margin-tb-mini">MySQL<div class="detail">8</div></a>
+                    <div class="right aligned column">
+                        共<h3 class="ui orange header m-inline-block" th:text="${#arrays.length(tags)}"> 8 </h3>个
                     </div>
                 </div>
             </div>
 
+            <div class="ui attached segment">
+                <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui left pointing label m-margin-tb-mini" th:classappend="${tag.id==activeTagId} ? 'brown'" th:each="tag : ${tags}">
+                    <span th:text="${tag.name}">
+                        Java
+                    </span>
+                    <div class="detail" th:text="${#arrays.length(tag.blogs)}">
+                        8
+                    </div>
+                </a>
+            </div>
+
             <div class="ui brown segment">
-                <div class="ui padded vertical segment">
-                    <div class="ui mobile reversed stackable grid">
+                <div class="ui padded vertical segment" th:each="blog:${page.content}">
+                    <div class="ui middle aligned mobile reversed stackable grid">
                         <div class="eleven wide column">
-                            <h3 class="ui header">文章标题</h3>
-                            <p>文章内容</p>
+                            <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">文章标题</a></h3>
+                            <p th:text="|${blog.description}......|">文章内容</p>
                             <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui horizontal link list">
-                                        <div class="item">
-                                            <img src="https://picsum.photos/100/100?image=1002" class="ui avatar image">
-                                            <div class="content"><a href="#" class="header">叮叮叮</a></div>
+                                <div class="row">
+                                    <div class="eleven wide column">
+                                        <div class="ui horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/100/100?image=1002" th:src="@{${blog.user.avatar}}" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header" th:text="${blog.user.nickName}">叮叮叮</a></div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-4-10</span>
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i><span th:text="${blog.views}">23</span>
+                                            </div>
                                         </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i>2020-4-10
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui brown basic label m-padded-small" th:text="${blog.type.name}">读书笔记</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="column">
+                                        <a href="#" class="ui basic left pointing label m-padded-mini" th:each="tag : ${blog.tags}" th:text="${tag.name}" th:classappend="${tag.id==activeTagId} ? 'brown'">笔记</a>
+                                    </div>
+                                </div>
+
+                                <!--            分页-->
+                                <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+                                    <div class="ui middle aligned two column grid">
+                                        <div class="column">
+                                            <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui brown mini button">上一页</a>
                                         </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i>0
+                                        <div class="right aligned column">
+                                            <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui brown mini button">下一页</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank" class="ui brown basic label m-padded-small">读书笔记</a>
-                                </div>
+
                             </div>
                         </div>
+
                         <div class="right aligned five wide column">
-                            <a href="#" target="_blank">
-                                <img src="https://picsum.photos/800/400?image=1001" class="ui rounded image">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                <img src="https://picsum.photos/800/400?image=1001" class="ui rounded image" th:src="@{${blog.firstPicture}}">
                             </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -91,7 +118,7 @@
     </div>
 
 <!--底部footer-->
-    <footer class="ui inverted vertical segment m-padded-tb-massive">
+    <footer th:replace="_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
@@ -126,8 +153,10 @@
         </div>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui/2.2.4/semantic.min.js"></script>
+<th:block th:replace="_fragments::script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui/2.2.4/semantic.min.js"></script>
+</th:block>
 
     <script>
         $('.menu.toggle').click(function () {

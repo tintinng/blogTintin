@@ -1,4 +1,4 @@
-package com.tintin.blog.web.controller;
+package com.tintin.blog.web.admin;
 
 import com.tintin.blog.po.Tag;
 import com.tintin.blog.service.TagService;
