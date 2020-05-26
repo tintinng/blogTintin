@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1.0">
     <title>归档</title>
@@ -10,7 +10,7 @@
 <body>
 
 <!--    导航-->
-    <nav class="ui inverted attached segment m-padded-tb-mini">
+    <nav th:replace="_fragments::menu(4)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui brown header item">Blog</h2>
@@ -41,85 +41,30 @@
                         <h3 class="ui brown header">归档</h3>
                     </div>
                    <div class="right aligned column">
-                       共<h2 class="ui brown header m-inline-block m-text-thin"> 16 </h2>篇博客
+                       共<h2 class="ui brown header m-inline-block m-text-thin" th:text="${blogCount}"> 16 </h2>篇博客
                    </div>
                 </div>
             </div>
 
-            <h2 class="ui center aligned header">2020</h2>
+            <th:block th:each="item : ${archiveMap}">
+            <h2 class="ui center aligned header" th:text="${item.key}">2020</h2>
             <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
+                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
                 <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
+                    <i class="brown circle icon"></i>
+                    <span th:text="${blog.title}">积极发展心理学</span>
+                    <div class="ui brown basic left pointing label" th:text="${#dates.format(blog.updateTime,'MMMdd')}">12月24号</div>
                 </span>
-                    <div class="ui brown basic label">原创</div>
+                    <div class="ui brown basic label" th:text="${blog.flag}">原创</div>
                 </a>
             </div>
-            <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
-                </span>
-                    <div class="ui brown basic label">原创</div>
-                </a>
-            </div>
-            <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
-                </span>
-                    <div class="ui brown basic label">原创</div>
-                </a>
-            </div>
-            <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
-                </span>
-                    <div class="ui brown basic label">原创</div>
-                </a>
-            </div>
-
-            <h2 class="ui center aligned header">2019</h2>
-            <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
-                </span>
-                    <div class="ui brown basic label">原创</div>
-                </a>
-            </div>
-            <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
-                </span>
-                    <div class="ui brown basic label">原创</div>
-                </a>
-            </div>
-
-            <h2 class="ui center aligned header">2018</h2>
-            <div class="ui fluid vertical menu">
-                <a href="#" target="_blank" class="item">
-                <span>
-                    <i class="brown circle icon"></i>   积极发展心理学
-                    <div class="ui brown basic left pointing label">12月24号</div>
-                </span>
-                    <div class="ui brown basic label">原创</div>
-                </a>
-            </div>
+            </th:block>
 
         </div>
     </div>
 
 <!--底部footer-->
-    <footer class="ui inverted vertical segment m-padded-tb-massive">
+    <footer th:replace="_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive">
         <div class="ui center aligned container">
             <div class="ui inverted divided stackable grid">
                 <div class="three wide column">
@@ -154,8 +99,10 @@
         </div>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui/2.2.4/semantic.min.js"></script>
+<th:block th:replace="_fragments::script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui/2.2.4/semantic.min.js"></script>
+</th:block>
 
     <script>
         $('.menu.toggle').click(function () {
