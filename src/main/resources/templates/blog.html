@@ -73,7 +73,7 @@
             </div>
 <!--            <div class="ui attached positive message m-padded-tb-middle">-->
 <!--                博客信息-->
-                <div class="ui attached positive segment m-padded-lr-middle m-padded-tb-middle">
+                <div class="ui attached positive segment m-padded-lr-middle m-padded-tb-middle" th:if="${blog.shareStatement}">
                     <ui class="list">
                         <li>作者：<span th:text="${blog.user.nickName}">叮叮叮</span><a href="#" th:href="@{/about}" target="_blank">（联系作者）</a></li>
                         <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020-4-11</span></li>
@@ -81,12 +81,12 @@
                     </ui>
                 </div>
 <!--            </div>-->
-            <div class="ui bottom attached segment">
+            <div class="ui bottom attached segment" th:if="${blog.commentable}">
 <!--                留言区域-->
                 <div id="comment-container" class="ui brown segment">
                     <div th:fragment="commentList">
                         <div class="ui threaded comments" style="max-width: 100%">
-                            <h3 class="ui dividing header">Comments</h3>
+                            <h3 class="ui dividing header">留言区：</h3>
                             <div class="comment" th:each="comment : ${comments}">
                                 <a class="avatar">
                                     <img src="/images/avatar/small/matt.jpg" th:src="@{${comment.avatar}}">
@@ -311,7 +311,7 @@
            position : 'left center'
         });
         // URL生成二维码
-        var serUrl = "127.0.0.1:8080";
+        var serUrl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
         var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
         var qrcode = new QRCode("qrcode", {
             text: serUrl+url,

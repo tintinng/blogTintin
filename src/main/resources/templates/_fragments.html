@@ -51,16 +51,18 @@
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header">最新博客</h4>
-                <div class="ui inverted linked list">
-                    <a href="#" class="item">用户故事1</a>
-                    <a href="#" class="item">用户故事2</a>
-                    <a href="#" class="item">用户故事3</a>
+                <div id="newblog-container">
+                    <div class="ui inverted linked list" th:fragment="newblogList">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事1</a>
+                        <!--                    <a href="#" class="item">用户故事2</a>-->
+                        <!--                    <a href="#" class="item">用户故事3</a>-->
+                    </div>
                 </div>
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header">联系我</h4>
                 <div class="ui inverted linked list">
-                    <a href="#" class="item">Email:906183742@qq.com</a>
+                    <a href="#" class="item" th:text="#{index.email}">906183742@qq.com</a>
                     <a href="#" class="item">QQ:906183742</a>
                 </div>
             </div>
@@ -82,6 +84,11 @@
     <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script src="../static/lib/qrcode/qrcode.js" th:src="@{/lib/qrcode/qrcode.js}"></script>
     <script src="../static/lib/waypoint/jquery.waypoints.min.js" th:src="@{/lib/waypoint/jquery.waypoints.min.js}"></script>
+
+    <script>
+        $('#newblog-container').load(/*[[]@{/footer/newblog}]*/"/footer/newblog");
+    </script>
+
 </th:block>
 
 </body>
